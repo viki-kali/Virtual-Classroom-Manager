@@ -1,4 +1,4 @@
-**Pesonal info:
+#Pesonal info:
 NAME : VIGNESH K
 ROLL NUMBER : 20BCS117
 EMAIL : gkvignesh0001@gmail.com
@@ -42,3 +42,7 @@ Assignment Submission: "Assignment submitted by Student [ID] in [Class Name]."
 3. Global Convention: Adherence to coding standards for readability and maintainability.
 4. Gold Standards: The code should include logging, exception handling, and transient error handling.
 5. Code Walkthrough: Candidates should be able to fully walk us through their code and the decisions made during development.
+
+#Compilation and Execution commands 
+$javac Assignment.java Classroom.java Student.java ClassroomManagerApp.java
+$java ClassroomManagerApp
