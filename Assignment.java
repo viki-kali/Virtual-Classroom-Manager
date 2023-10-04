@@ -10,5 +10,8 @@ class Assignment {
     public String getClassName() {
         return className;
     }
-
+    
+    public String getAssignmentDetails() {
+        return assignmentDetails;
+    }
 }
