@@ -10,7 +10,9 @@ public class ClassroomManagerApp {
         Map<String, Classroom> classrooms = new HashMap<>();
         Map<String, List<Student>> studentsByClass = new HashMap<>();
         List<Assignment> assignments = new ArrayList<>();
-
+        Auth a1 = new Auth();
+        String id; String pass;
+        int check;
         while (true) {
             System.out.println("Menu:");
             System.out.println("1. Add Classroom");
@@ -29,7 +31,7 @@ public class ClassroomManagerApp {
                     System.out.print("Enter the class name: ");
                     String className = scanner.nextLine();
                     classrooms.put(className, new Classroom(className));
-                    System.out.println("Classroom added.");
+                    System.out.println("Classroom "+className+" has been created.");
                     break;
                 case 2:
                     System.out.print("Enter the student ID: ");
@@ -45,7 +47,7 @@ public class ClassroomManagerApp {
                     }
                     students.add(student);
 
-                    System.out.println("Student added to the class.");
+                    System.out.println("Student "+studentId+" has been enrolled in class "+studentClassName+".");
                     break;
                 case 3:
                     System.out.print("Enter the class name: ");
@@ -54,7 +56,7 @@ public class ClassroomManagerApp {
                     String assignmentDetails = scanner.nextLine();
                     Assignment assignment = new Assignment(assignmentClassName, assignmentDetails);
                     assignments.add(assignment);
-                    System.out.println("Assignment scheduled for the class.");
+                    System.out.println("Assignment for class "+assignmentClassName+" has been scheduled.");
                     break;
                 case 4:
                     System.out.print("Enter student ID: ");
@@ -69,7 +71,7 @@ public class ClassroomManagerApp {
                     for (Assignment a : assignments) {
                         if (a.getClassName().equals(classNameForSubmission)
                                 && a.getAssignmentDetails().equals(assignmentDetailsForSubmission)) {
-                            System.out.println("Assignment marked as submitted.");
+                            System.out.println("Assignment submitted by Student "+studentIdForSubmission+" in class "+classNameForSubmission+".");
                             assignmentSubmittedFlag = true;
                             break;
                         }
@@ -80,23 +82,35 @@ public class ClassroomManagerApp {
                     }
                     break;
                 case 5:
+                    int userChoice=0;
+                    while(userChoice!=4){
                     System.out.println("Select User:");
                     System.out.println("1. Classroom Management");
                     System.out.println("2. Student Management");
                     System.out.println("3. Assignment Management");
+                    System.out.println("4. Back");
                     System.out.print("Enter your user choice: ");
-                    int userChoice = scanner.nextInt();
+                    userChoice = scanner.nextInt();
                     scanner.nextLine(); // Consume the newline character
 
                     switch (userChoice) {
                         case 1:
+                            int classroomChoice=0;
+                            System.out.print("\nEnter Username : ");
+                            id = scanner.next();
+                            System.out.print("\nEnter Password : ");
+                            pass = scanner.next();
+                            check = a1.validateClass(id,pass);
+                            if(check==1){
                             // Classroom Management
+                            while (classroomChoice!=4){
                             System.out.println("Classroom Management Options:");
                             System.out.println("1. Add Classrooms");
                             System.out.println("2. List Classrooms");
                             System.out.println("3. Remove Classrooms");
+                            System.out.println("4. Logout");
                             System.out.print("Enter your choice: ");
-                            int classroomChoice = scanner.nextInt();
+                            classroomChoice = scanner.nextInt();
                             scanner.nextLine(); // Consume the newline character
 
                             switch (classroomChoice) {
@@ -129,14 +143,30 @@ public class ClassroomManagerApp {
                                 default:
                                     System.out.println("Invalid choice.");
                             }
+                            }
+                            }
+                            else
+                            {
+                                System.out.println("Invalid login.");
+                            }
                             break;
+
                         case 2:
+                            int studentChoice=0;
+                            System.out.print("\nEnter Username : ");
+                            id = scanner.next();
+                            System.out.print("\nEnter Password : ");
+                            pass = scanner.next();
+                            check = a1.validateStudent(id,pass);
+                            if(check==1){
+                            while (studentChoice!=3){
                             // Student Management
                             System.out.println("Student Management Options:");
                             System.out.println("1. Enroll Students into Classrooms");
                             System.out.println("2. List Students in Each Classroom");
+                            System.out.println("3. Logout");
                             System.out.print("Enter your choice: ");
-                            int studentChoice = scanner.nextInt();
+                            studentChoice = scanner.nextInt();
                             scanner.nextLine(); // Consume the newline character
 
                             switch (studentChoice) {
@@ -170,14 +200,29 @@ public class ClassroomManagerApp {
                                 default:
                                     System.out.println("Invalid choice.");
                             }
+                            }
+                            }
+                            else
+                            {
+                                    System.out.println("Invalid login.");
+                            }
                             break;
                         case 3:
+                            int assignmentUserChoice=0;
+                            System.out.print("\nEnter Username : ");
+                            id = scanner.next();
+                            System.out.print("\nEnter Password : ");
+                            pass = scanner.next();
+                            check = a1.validateaAssignment(id,pass);
+                            if(check==1){
+                            while (assignmentUserChoice!=3){
                             // Assignment Management
                             System.out.println("Assignment Management Options:");
                             System.out.println("1. Schedule Assignments for Classrooms");
                             System.out.println("2. Allow Students to Submit Assignments");
+                            System.out.println("3. Logout");
                             System.out.print("Enter your choice: ");
-                            int assignmentUserChoice = scanner.nextInt();
+                            assignmentUserChoice = scanner.nextInt();
                             scanner.nextLine(); // Consume the newline character
 
                             switch (assignmentUserChoice) {
@@ -217,12 +262,19 @@ public class ClassroomManagerApp {
                                     break;
                                 default:
                                     System.out.println("Invalid choice.");
+
+                            }
+                            }}
+                            else
+                            {
+                                    System.out.println("Invalid login.");
                             }
                             break;
                         default:
                             System.out.println("Invalid choice.");
-                    }
-                    break;
+                }}
+                break;
+
                 case 6:
                     // Exit the program
                     System.out.println("Exiting the program.");
